@@ -1,0 +1,41 @@
+status: pass
+datasets:
+  train:
+    rows: 1000
+    date_range:
+      start: '2026-01-01'
+      end: '2026-06-30'
+  later:
+    rows: 300
+    date_range:
+      start: '2026-07-01'
+      end: '2026-08-31'
+  holdout:
+    rows: 250
+    date_range:
+      start: '2026-09-01'
+      end: '2026-09-30'
+target: units_kwh
+model_features:
+- rooms
+- members
+- ac_hours_per_day
+- avg_temp_c
+- house_area_sqft
+- solar_kw
+- connection
+- feeder
+excluded_columns:
+- billed_units_after_reading
+- record_id
+- units_kwh
+checks:
+  target_absent_from_holdout: true
+  record_ids_unique_and_disjoint: true
+  chronological_splits: true
+  configured_features_safe: true
+notes:
+- chronological split ordering is valid
+- 'excluded post-outcome/identifier fields are present in raw training data: billed_units_after_reading,
+  record_id'
+errors: []

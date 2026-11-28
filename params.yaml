@@ -1,0 +1,24 @@
+data:
+  train: data/raw/train.csv
+  later: data/raw/later.csv
+  holdout: data/raw/holdout_features.csv
+
+target: units_kwh
+id_column: record_id
+date_column: date
+
+# Only measurements and household attributes available before the meter read.
+features:
+  - rooms
+  - members
+  - ac_hours_per_day
+  - avg_temp_c
+  - house_area_sqft
+  - solar_kw
+  - connection
+  - feeder
+
+# These columns must never enter the model feature matrix.
+forbidden_features:
+  - billed_units_after_reading
+  - record_id
